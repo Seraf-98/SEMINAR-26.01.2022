@@ -13,7 +13,7 @@ int Number = int.Parse(Console.ReadLine());
 
 int x = 1; // счетчик
 
-while (x <= Number) // пока счетчик меньше номера
+while (x <= Number) // пока счетчик меньше номера или равен ему
 {
     Console.Write (x*x*x+ " "); // возведение в: x*x (квадрат), x*x*x (куб)
 
