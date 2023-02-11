@@ -9,14 +9,18 @@ int[] array = GetArray (6, -100, 100);
 
 Console.WriteLine(string.Join(" ", array));
 
-int sum = 0;
-
-for (int i = 1; i < array.Length; i+=2)
+int negativeSum(int[] array)
 {
-    sum = sum + array[i];
+    int sum = 0;
+
+    for (int i = 1; i < array.Length; i+=2)
+        {
+            sum = sum + array[i];
+        }
+        return sum;
 }
 
-Console.WriteLine($"Сумма элементов, стоящих на нечётных позициях = {sum}");
+Console.WriteLine($"Сумма элементов, стоящих на нечётных позициях = {negativeSum(array)}");
 
 int[] GetArray (int size, int minValue, int maxValue)
 {
