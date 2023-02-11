@@ -8,14 +8,19 @@ int[] array = GetArray (10, 100, 1000);
 
 Console.WriteLine(string.Join(" ", array));
 
-int count = 0;
-
-for (int i = 0; i < array.Length; i++)
+int PositivNumbers(int[] array)
 {
-    if (array[i]%2==0)
-    count++;
+    int count = 0;
+
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i]%2==0)
+        count++;
+    }
+    return count;
 }
-Console.WriteLine($"Количество чётных чисел в массиве = {count}");
+
+Console.WriteLine($"Количество чётных чисел в массиве = {PositivNumbers(array)}");
 
 int[] GetArray (int size, int minValue, int maxValue)
 {
