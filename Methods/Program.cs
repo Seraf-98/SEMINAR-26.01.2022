@@ -1,277 +1,452 @@
-﻿namespace MyMethodsJudisk
+﻿int Exponentiation (int basis, int degree)  //  Метод возведение в степень
 {
-    public class JudMethod
+  int result = 1;
+  for (int i = 1; i <= degree; i++)
+  {
+    result = result * basis;
+  }
+  return result;
+}
+
+int Summa (int Number)  //  Метод сумма цифр в числе
+{
+  int result = 0;
+  for (; Number > 0; Number /= 10)
+  {
+   result = result + Number%10;
+  }
+  return result;
+}
+
+
+void Put (int [] Numbers)  //  Метод заполнение одномерного массива рандомом
+{
+  int length = Numbers.Length;
+  
+  for (int i = 0; i < length; i++)
+  {
+      Numbers[i] = new Random().Next(1, 10);
+  }
+  return;
+}
+
+void PutHands (int [] elements)  //  Метод заполнение одномерного массива с клавиатуры
+{
+  int length = elements.Length;
+  
+  for (int i = 0; i < length; i++)
+  {
+      System.Console.WriteLine("Введите элемент: ");
+      elements[i] = int.Parse(Console.ReadLine());
+  }
+  return;
+}
+
+void Print (int[] point)  //  Метод вывод в консоль одномерного массива
+{
+  int digit = point.Length;
+  for (int count = 0; count < digit; count++)
+  {
+      System.Console.Write(point[count] + " ");
+  }
+  return;
+}
+
+void Program()  // Метод для запуска домашек - свитч
+{
+    while (true)
     {
+        System.Console.Write("Введите номер задачи(34, 36, 38 или 000 для выхода): ");
 
+        int task = int.Parse(Console.ReadLine());
 
-        public static void TaskNum(int number)// Вывод какой номер задания 
+        switch (task)
         {
-            System.Console.WriteLine($"__Задание {number}___");
+            case 34:
+                Console.Clear();
+                System.Console.WriteLine("Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.");
+                int[] Array34 = RandomArray(8, 100, 999);
+                System.Console.WriteLine(String.Join(" ", Array34));
+                System.Console.WriteLine($"Количество четных элементов в массиве - {CountPositiveNumbers(Array34)}");
+                break;
+
+            case 36:
+                Console.Clear();
+                System.Console.WriteLine("Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.");
+                int[] Array36 = RandomArray(6, 0, 10);
+                System.Console.WriteLine(String.Join(" ", Array36));
+                System.Console.WriteLine($"Сумма элементов, находящихся на нечетных позициях в массиве - {SumOfNegatives(Array36)}");
+                break;
+
+            case 38:
+                Console.Clear();
+                System.Console.WriteLine("Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.");
+                double[] Array38 = RandomDoubleArray(6, 0, 10);
+                System.Console.WriteLine(String.Join(" ", Array38));
+                System.Console.WriteLine($"Разница между максимальным и минимальным значением - {MinMax(Array38)}");
+                break;
+
+            case 000:
+                return;
+                break;
+
+            default:
+                Console.Clear();
+                System.Console.WriteLine("Неверное значение");
+                break;
         }
+    }
+}
+
+int[] RandomArray(int size, int minValue, int maxValue)  // Метод для заполнения массива случайными числами
+{
+    int[] res = new int[size];
+
+    for (int i = 0; i < size; i++)
+    {
+        res[i] = new Random().Next(minValue, maxValue + 1);
+    }
+    return res;
+}
+
+int CountPositiveNumbers(int[] Array)  // Метод для подсчета количества положительных элементов
+{
+    int count = 0;
+    foreach (var value in Array)
+    {
+        value % 2 == 0 ? count++ : 0;
+    }
+    return count;
+}
+
+int SumOfNegatives(int[] Array)  // Метод для подсчета элементов с нечетными индексами
+{
+    int sum = 0;
+
+    for (int i = 0; i < Array.Length; i++)
+    {
+        if (i % 2 != 0) sum += Array[i];
+    }
+    return sum;
+}
+
+double[] RandomDoubleArray(int size, int minValue, int maxValue)  // Метод для заполнения массива случайными вещественными числами
+{
+    double[] res = new double[size];
+    var rand = new Random();
+
+    for (int i = 0; i < size; i++)
+    {
+        res[i] = Convert.ToDouble(rand.Next(-100, 100)/10.0);
+    }
+    return res;
+}
+
+double MinMax(double[] Array)  // Метод для нахождения разницы между максимальным и минимальным значениями в массиве
+
+{
+    double Min = Array[0];
+    double Max = Array[0];
+
+    for (int i = 0; i < Array.Length; i++)
+    {
+        if (Array[i] < Min) Min = Array[i];
+        if (Array[i] > Max) Max = Array[i];
+    }
+    return Max - Min;
+}
+
+int CountPositiveNumbers(int[] array)  // Метод для подсчета количества положительных элементов
+{
+  int count = 0;
+  foreach (var i in array)
+  {
+    if (i > 0)
+      count++;
+  }
+  return count;
+}
+
+void Task43()  // Метод для решения задачи № 43
+{
+  System.Console.Write("Задайте значение b1: ");
+  double b1 = int.Parse(Console.ReadLine());
+
+  System.Console.Write("Задайте значение b2: ");
+  double b2 = int.Parse(Console.ReadLine());
+
+  System.Console.Write("Задайте значение k1: ");
+  double k1 = int.Parse(Console.ReadLine());
+
+  System.Console.Write("Задайте значение k2: ");
+  double k2 = int.Parse(Console.ReadLine());
+
+  double x = (b2 - b1) / (k1 - k2);
+  double y = k2 * x + b2;
+
+  if ((y != k1 * x + b1) || (k1 - k2 == 0)) System.Console.WriteLine("Решений нет!");
+  else
+  {
+    System.Console.WriteLine($"Координаты пересечения двух прямых, x, y: ({x}); ({y})");
+  }
+}
+
+int Fibonacci (int n)  // Метод для вычисления числа Фибоначчи
+{
+return n > 1 ? Fibonacci(n - 1) + Fibonacci(n - 2) : n;
+}
+
+int PrintFibonacci (int n)  //  Вывод последовательности Фибоначчи
+{
+
+  for (int i = 0; i < n; i++)
+  {
+    System.Console.WriteLine(Fibonacci(i));
+  }
+  return Fibonacci(n);
+}
+
+int NumFromConsole(string userNumber)  //  Метод для ввода значений с консоли
+{
+    Console.Write($"Введите значение {userNumber}: ");
+    int number = int.Parse(Console.ReadLine());
+    return number;
+}
 
 
-
-        public static int RandomSign(string sign)//если "Yes" то числа могут иметь рандомный знак если любое другое то только +
+double[,] DoubleMatrix(int rows, int columns) // Метод для заполнения матрицы случайными вещественными числами
+{
+    double[,] matrix = new double[rows, columns];
+    var rand = new Random();
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
         {
-            int randomSign = 0;
-            int signMinus = 1;
-            if (sign == "Yes" || sign == "yes" || sign == "y")
-            {
-                randomSign = new Random().Next(0, 2);
-                if (randomSign == 1)
-                {
-                    signMinus = -1;
-                }
-            }
-            return signMinus;
+            matrix[i, j] = Convert.ToDouble(rand.Next(-100, 100) / 10.0);
         }
+    }
+    return matrix;
+}
 
-        int[] reverseArrays(int[] array)
+void PrintDoubleMatrix(double[,] matrix)  // Метод для вывода матрицы double в консоль
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            int[] reverseArray = new int[array.Length];
-            int reverseI = array.Length;
-            for (int i = 0; i < array.Length; i++)
-            {
-                reverseArray[i] = array[--reverseI];
-            }
-
-            return reverseArray;
+            System.Console.Write(matrix[i, j] + " ");
         }
+        System.Console.WriteLine();
+    }
+}
 
-        public static void ParityCheckInArray(int[] array34)
+int[,] IntMatrix(int rows, int columns, int min, int max)  // Метод для заполнения матрицы случайными целыми числами
+{
+    int[,] matrix = new int[rows, columns];
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
         {
-            JudShowArrays.ShowArrayMetodInt(array34);//показываем массив
-
-            int count = 0;
-            for (int i = 0; i < array34.Length; i++)
-            {
-                if (array34[i] % 2 == 0)//проверка на четность числа если прошло то прибавляем счетчик
-                {
-                    ++count;
-                }
-            }
-            System.Console.WriteLine($"количество четных чисел : {count}");
+            matrix[i, j] = new Random().Next(min, max + 1);
         }
+    }
+    return matrix;
+}
 
-        public static void SumNumOnOddIndexInArray(int[] array36)
+void PrintMatrix(int[,] matrix)  // Метод для вывода матрицы int
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            JudShowArrays.ShowArrayMetodInt(array36);//показываем массив
-            int Result = 0;
-            for (int i = 0; i < array36.Length; i++)
-            {
-                if (i % 2 != 0)//проверка на нечетность нидекса
-                {
-                    Result = array36[i] + Result;
-                }
-            }
-            System.Console.WriteLine($"сумма эл на нечетных идексах : {Result}");
-        }//сумма чисел на нечетных индексах
-
-        public static void MinMaxInDoubleArray(double[] array38)//вычисление минимального и максимального числа в массиве и вывод их разницы
-        {
-            JudShowArrays.ShowArrayMetodDouble(array38);
-
-            double max = array38[0];
-            double min = array38[0];
-
-            for (int i = 1; i < array38.Length; i++)
-            {
-                if (array38[i] > max)
-                {
-                    max = array38[i];
-                }
-                else if (array38[i] < min)
-                {
-                    min = array38[i];
-                }
-            }
-            double Resulte = max - min;
-            System.Console.WriteLine($"max : {max} min: {min} difference: {Resulte}");
-
-        }
-
-        public static bool CheckReady() // проверка хочет ли пользователь продолжить
-        {
-            Console.WriteLine("Eсли хотите продолжить введите y ");
-            string yes = Console.ReadLine();
-            return yes == "y";
-        }
-
-        public static void CountingNumbersGreatedZero(ref int count)//подсчет чисел больше 0 которые вводит пользователь 
-        {
-            if (CheckReady())
-            {
-
-                int numberM = JudSetNumber.SetNumberInt("Введите число");
-                if (numberM > 0)
-                {
-                    count++;
-                }
-                CountingNumbersGreatedZero(ref count);
-            }
+            if (matrix[i, j] >= 0 && matrix[i, j] < 10)
+                System.Console.Write("0" + matrix[i, j] + " ");
             else
-            {
-                Console.WriteLine($"Количество чисел больше 0 равно: {count}");
-            }
+                System.Console.Write(matrix[i, j] + " ");
         }
-
+        System.Console.WriteLine();
     }
+}
 
-    public class JudSetNumber
+
+void IndexValue(int[,] matrix)  // Метод для вывода значения по индексу элемента
+{
+    int userI = NumFromConsole("индекс строки");
+    int userJ = NumFromConsole("индекс столбца");
+
+    if (userI > matrix.GetLength(0) || userJ > matrix.GetLength(1))
+        System.Console.WriteLine("Такого элемента нет!");
+    else
     {
-        public static int SetNumberInt(string text)
-        {
-            Console.WriteLine(text);
-            int number = int.Parse(Console.ReadLine());
-            return number;
-        }
-
-        public static double SetNumberDouble(string text)
-        {
-            Console.WriteLine(text);
-            double number = double.Parse(Console.ReadLine());
-            return number;
-        }
+        System.Console.WriteLine($"На этой позиции находится число {matrix[userI, userJ]}");
     }
+}
 
-    public class JudShowArrays
+void ColumnsAverage(int[,] matrix)  //  Метод для вычисления среднего арифметического по столбцам
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
     {
-        public static void ShowArrayMetodInt(int[] testArray)// показывает массив с которым работаем для упрощения проверки 
+        double sum = 0;
+        double average = 0;
+        for (int i = 0; i < matrix.GetLength(0); i++)
         {
-            int[] showArray = testArray;
-            var str = string.Join(",", showArray);
-            Console.WriteLine(str);
+            sum = sum + matrix[i, j];
         }
-        public static void ShowArrayMetodString(string[] testArray)// показывает массив с которым работаем для упрощения проверки 
-        {
-            string[] showArray = testArray;
-            var str = string.Join(" ", showArray);
-            Console.WriteLine(str);
-        }
-
-        public static void ShowArrayMetodDouble(double[] testArray)// тоже самое что и выше только double
-        {
-            double[] showArray = testArray;
-            var str = string.Join(" ", showArray);
-            Console.WriteLine(str);
-        }
-        public static void ShowArray2DInt(int[,] matrix)
-        {
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int l = 0; l < matrix.GetLength(1); l++)
-                {
-                    System.Console.Write(matrix[i, l] + " ");
-                }
-
-                System.Console.WriteLine();
-            }
-        }
-
-        public static void ShowArray2DDouble(double[,] matrix)
-        {
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int l = 0; l < matrix.GetLength(1); l++)
-                {
-                    System.Console.Write(matrix[i, l] + " ");
-                }
-
-                System.Console.WriteLine();
-            }
-        }
-
-
+        average = sum / matrix.GetLength(0);
+        System.Console.WriteLine($"столбец {j}: {Math.Round(average, 2)}");
     }
+}
 
-    public class JudCreateArrayAndMatrix
+int[,] SpiralFilling(int[,] matrix)  //  Метод для заполнения матрицы по спирали
+{
+    int value = 1;
+    int size = matrix.GetLength(0);
+    int maxIndex = size - 1;
+    int i = 0;
+    int j = 0;
+
+    while (value <= size * size)
     {
-        public static int[] CreateArrayInt(double degree, int maxSizeArray, string sign)// создаем массив / если введем 0 , 0 то будет полностью случайный массив / degree - до какого числа / maxSizeArray - макс размер массив  
-        {
-
-            int signMinus = 1;
-            if (degree != 0 && maxSizeArray != 0)
-            {
-                double maxDegreeDouble = Math.Pow(10, degree);//определяем максимальный размер массив если degree 3 то будет 100-1000 4 1000-10000 
-                int maxDegree = Convert.ToInt32(maxDegreeDouble);
-                int minDegree = maxDegree / 10;//задаем минимальное число
-
-                int sizeArray = new Random().Next(1, maxSizeArray);// рандомим размер массив он может быть как равен введенному maxSizeArray так и меньше
-                int[] rndArray = new int[sizeArray];
-
-                for (int i = 0; i < sizeArray; i++)//проходим по каждому пустому индексу массива и заполняем рандомным числом заданным аргументом
-                {
-                    signMinus = JudMethod.RandomSign(sign);
-                    rndArray[i] = (new Random().Next(minDegree, maxDegree)) * signMinus;
-                }
-                return rndArray;
-            }
-            else//если 0,0 dct рандомно
-            {
-                int[] rndArray = new int[10];//изначально делал тоже рандомным но потом когда мне выпало больше 1000 размер массива посчитал что лучше 10 сделать
-                for (int i = 0; i < 10; i++)
-                {
-                    signMinus = JudMethod.RandomSign(sign);
-                    rndArray[i] = (new Random().Next(0, 1000)) * signMinus; //числа решил 0-1000 сделать потому что так проще считать но это омжно изменить и хоть брать до 10^7 как и было изначально
-                }
-                return rndArray;
-            }
-
-        }
-
-        public static double[] CreateArrayDouble(string sign)//создание double массивов по принципу 0,0 в методе выше если ввести yes то числа рандомный знак   
-        {
-            double signMinus = 1;
-
-            double[] rndArray = new double[10];//изначально делал тоже рандомным но потом когда мне выпало больше 1000 размер массива посчитал что лучше 10 сделать
-            for (int i = 0; i < 10; i++)
-            {
-                signMinus = Convert.ToDouble(JudMethod.RandomSign(sign));
-
-                double fraction = new Random().Next(10, 100);
-                double fraction100 = fraction / 100;
-                double whole = new Random().Next(1, 100);
-                double Resulte = whole + fraction100;
-                rndArray[i] = Resulte * signMinus;
-            }
-            return rndArray;
-        }
-        public static int[,] GetMatrixInt(int rows, int columns, int max, int min)//создание двумерного массив Int с мин и макс значениями
-        {
-            int[,] matrix = new int[rows, columns];
-            for (int i = 0; i < rows; i++)
-            {
-                for (int l = 0; l < columns; l++)
-                {
-                    matrix[i, l] = new Random().Next(min, max + 1);
-                }
-            }
-            return matrix;
-        }
-
-        public static double[,] GetMatrixDouble(int rows, int columns, int max, int min, string sign) // двумерный массив double мин макс и случ знаком
-        {
-            double signMinus = 1;
-
-            double[,] matrix = new double[rows, columns];
-            for (int i = 0; i < rows; i++)
-            {
-                for (int l = 0; l < columns; l++)
-                {
-                    signMinus = Convert.ToDouble(JudMethod.RandomSign(sign));
-
-                    double fraction = new Random().Next(1, 10);
-                    double fraction100 = fraction / 100;
-                    double whole = new Random().Next(min, max + 1);
-                    double Resulte = whole + fraction100;
-                    matrix[i, l] = Resulte * signMinus;
-                }
-            }
-            return matrix;
-        }
-
+        matrix[i, j] = value;
+        value++;
+        if (i <= j + 1 && i + j < maxIndex)
+            j++;
+        else if (i < j && i + j >= maxIndex)
+            i++;
+        else if (i >= j && i + j > maxIndex)
+            j--;
+        else
+            i--;
     }
+    return matrix;
+}
 
+void SortRows (int [,] matrix)  //  Метод для сортировки чисел в строке матрицы
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (int k = 0; k < matrix.GetLength(1)-1; k++)
+            {
+                if (matrix[i,k] < matrix [i,k+1])
+                {
+                    int temp = matrix [i,k+1];
+                    matrix [i,k+1] = matrix[i,k];
+                    matrix[i,k] = temp;
+                }
+            }
+            
+        }
+    }
+}
 
+int MinRowSum(int[,] matrix)  //  Метод для нахождения строки с минимальной суммой элементов
+{
+    int row = 0;
+    int? min = null;
 
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            sum = sum + matrix[i, j];
+        }
+        if (min == null) min = sum;
+        else if (sum < min)
+        {
+            min = sum;
+            row = i;
+        }
+        System.Console.WriteLine($"Сумма элементов {i} строки равна {sum}");
+    }
+    return row;
+}
+
+int[,] ProductMatrix(int[,] matrix1, int[,] matrix2)  //  Метод для умножения матриц
+{
+    if (matrix1.GetLength(1) != matrix2.GetLength(0)) Console.WriteLine("Решений нет!");
+
+    int[,] resultMatrix = new int[matrix1.GetLength(0), matrix2.GetLength(1)];
+
+    for (int i = 0; i < matrix1.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix2.GetLength(1); j++)
+        {
+            for (int l = 0; l < matrix2.GetLength(0); l++)
+            {
+                resultMatrix[i, j] += matrix1[i, l] * matrix2[l, j];
+            }
+        }
+    }
+    return resultMatrix;
+}
+
+void PutOrder(int[] Numbers)  //  Метод заполнение одномерного массива по порядку
+{
+    int length = Numbers.Length;
+
+    for (int i = 0; i < length; i++)
+    {
+        Numbers[i] = i + 10;
+    }
+    return;
+}
+
+int[] Shuffle(int[] arr)  // Метод для перемешивания чисел
+{
+    Random rand = new Random();
+
+    for (int i = arr.Length - 1; i >= 1; i--)
+    {
+        int j = rand.Next(i + 1);
+
+        int temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
+
+int[,,] CubeMatrix(int valueX, int valueY, int valueZ)  // Метод для заполнения матрицы неповторяющимися случайными целыми числами от 10 до 99
+{
+    int[,,] matrix = new int[valueX, valueY, valueZ];
+
+    if ((valueX * valueY * valueZ) > 99) Console.WriteLine("Слишком большой размер. Количество значений не должно превышать 99");
+    int[] array = new int[90];
+    PutOrder(array);
+    Shuffle(array);
+
+    for (int i = 0; i < valueX * valueY * valueZ;)
+    {
+        for (int x = 0; x < valueX; x++)
+        {
+            for (int y = 0; y < valueY; y++)
+            {
+                for (int z = 0; z < valueZ; z++)
+                {
+                    matrix[x, y, z] = array[i];
+                    i++;
+                }
+
+            }
+        }
+    }
+    return matrix;
+}
+
+void Print3dMatrix(int[,,] matrix)  //  Метод для вывода в консоль 3d матрицы
+{
+    for (int x = 0; x < matrix.GetLength(0); x++)
+    {
+        for (int y = 0; y < matrix.GetLength(1); y++)
+        {
+            for (int z = 0; z < matrix.GetLength(2); z++)
+            {
+                System.Console.Write($"{matrix[x, y, z]} ({x}, {y}, {z}) ");
+            }
+            System.Console.WriteLine();
+        }
+    }
 }
